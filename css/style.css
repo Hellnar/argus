@@ -1,0 +1,288 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: hidden;
+  width: 100vw;
+  height: 100vh;
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(50% 50% at 50% 50%, #3FCB8D 0%, #25895D 100%);
+  display: flex;
+  justify-content: center;
+}
+
+.mobile {
+  display: none;
+}
+
+.desktop {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-width: 1500px;
+}
+
+.desktop .main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-left: 1.25rem;
+}
+
+.desktop .main-content .main-text {
+  padding-left: 3.125rem;
+}
+
+.desktop .main-content .main-text .logo {
+  margin: 3.125rem 0;
+  width: 16rem;
+  height: 4.4375rem;
+}
+
+.desktop .main-content .main-text h1 {
+  font-size: 3rem;
+  line-height: 3.6875rem;
+  font-weight: 700;
+  margin-bottom: 0.625rem;
+}
+
+.desktop .main-content .main-text .present {
+  font-size: 1.5rem;
+  line-height: 1.875rem;
+  font-weight: 700;
+  margin-bottom: 2.5rem;
+}
+
+.desktop .main-content .main-text .description {
+  font-size: 1.5rem;
+  margin-bottom: 3.125rem;
+}
+
+.desktop .main-content .greeting {
+  width: 32.625rem;
+  height: 26.0625rem;
+}
+
+.desktop .tree {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.desktop .tree .tree-img {
+  width: 50.5625rem;
+  height: 64rem;
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(5px 5px 5px rgba(238, 240, 219, 0.3));
+}
+
+.desktop .tree .lights {
+  position: absolute;
+  top: -0.625rem;
+  left: -13.125rem;
+  width: 63.6875rem;
+  height: 20.1875rem;
+  z-index: 1;
+}
+
+.desktop .tree .balls img {
+  width: 5.4181rem;
+  height: 6.9375rem;
+  position: absolute;
+  z-index: 3;
+}
+
+.desktop .tree .balls img:nth-child(1) {
+  top: 7.875rem;
+  left: 27rem;
+}
+
+.desktop .tree .balls img:nth-child(2) {
+  top: 14.3125rem;
+  left: 15.625rem;
+}
+
+.desktop .tree .balls img:nth-child(3) {
+  top: 23.6875rem;
+  left: 35.75rem;
+}
+
+.desktop .tree .balls img:nth-child(4) {
+  top: 27.6875rem;
+  left: 6.4375rem;
+}
+
+.desktop .tree .balls img:nth-child(5) {
+  top: 35.625rem;
+  left: 23.125rem;
+}
+
+.desktop .tree .balls img:nth-child(6) {
+  top: 44.5625rem;
+  left: 32.5625rem;
+}
+
+.desktop .tree .balls img:nth-child(7) {
+  top: 49.375rem;
+  left: 9.0625rem;
+}
+
+.desktop .tree .balls img:hover {
+  cursor: pointer;
+  filter: drop-shadow(0px 0px 5px #eef0db);
+}
+
+@media (max-width: 1440px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 1240px) {
+  html {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 1150px) {
+  html {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 980px) {
+  html {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 889px) {
+  html {
+    font-size: 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 7px;
+  }
+}
+
+@media (max-width: 600px) {
+  html {
+    font-size: 12px;
+  }
+  html body {
+    width: 100vw;
+    overflow-x: hidden;
+  }
+  html body .desktop {
+    display: none;
+  }
+  html body .mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    position: relative;
+  }
+  html body .mobile .logo {
+    padding: 60px 0 150px 0;
+    max-width: 256px;
+    height: auto;
+  }
+  html body .mobile .lights {
+    position: absolute;
+    top: 130px;
+    right: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 61rem;
+  }
+  html body .mobile .main-text {
+    padding: 0 5rem;
+  }
+  html body .mobile .main-text h1 {
+    font-size: 3rem;
+    line-height: 3.6875rem;
+    font-weight: 700;
+    margin-bottom: 0.625rem;
+  }
+  html body .mobile .main-text .present {
+    font-size: 1.5rem;
+    line-height: 1.875rem;
+    font-weight: 700;
+    margin-bottom: 2.5rem;
+  }
+  html body .mobile .main-text .description {
+    font-size: 1.5rem;
+    margin-bottom: 3.125rem;
+  }
+  html body .mobile .tree-img-mob {
+    width: 100%;
+  }
+  html body .mobile .balls img {
+    width: 86.6896px;
+    height: auto;
+    position: absolute;
+    z-index: 3;
+  }
+  html body .mobile .balls img:nth-child(1) {
+    top: 60rem;
+    left: 30rem;
+  }
+  html body .mobile .balls img:nth-child(2) {
+    top: 73.3125rem;
+    left: 13.625rem;
+  }
+  html body .mobile .balls img:nth-child(3) {
+    top: 80.6875rem;
+    left: 35.75rem;
+  }
+  html body .mobile .balls img:nth-child(4) {
+    top: 94.6875rem;
+    left: 19.4375rem;
+  }
+  html body .mobile .balls img:nth-child(5) {
+    top: 103.625rem;
+    left: 36.125rem;
+  }
+  html body .mobile .balls img:nth-child(6) {
+    top: 112.5625rem;
+    left: 6.5625rem;
+  }
+  html body .mobile .balls img:nth-child(7) {
+    top: 121.375rem;
+    left: 30.0625rem;
+  }
+  html body .mobile .balls img:hover {
+    filter: drop-shadow(0px 0px 5px #eef0db);
+  }
+  html body .mobile .greeting-box {
+    position: absolute;
+    right: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    background: linear-gradient(180deg, rgba(37, 137, 93, 0) 0%, #25895D 68.23%);
+    top: 2300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  html body .mobile .copyright {
+    margin-top: 70px;
+    margin-bottom: 50px;
+    font-size: 16px;
+  }
+}
+/*# sourceMappingURL=style.css.map */
