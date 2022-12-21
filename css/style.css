@@ -141,6 +141,145 @@ body {
   filter: drop-shadow(0px 0px 5px #eef0db);
 }
 
+.modal-box {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(2, 23, 14, 0.44);
+  backdrop-filter: blur(1.5px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-box .modal {
+  width: fit-content;
+  height: fit-content;
+  max-width: 40%;
+  max-height: 80%;
+  background-color: #3FCB8D;
+  padding: 15px;
+  background: linear-gradient(180deg, #25895D 10%, #3FCB8D 100%);
+  box-shadow: 0px 6px 7px rgba(0, 0, 0, 0.25);
+  border-radius: 3px;
+}
+
+.modal-box .modal .modal-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+}
+
+.modal-box .modal .modal-header img:hover {
+  cursor: pointer;
+}
+
+.modal-box .modal .enter-email {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-box .modal .enter-email .add-email {
+  margin-top: 1rem;
+}
+
+.modal-box .modal .enter-email .email-error {
+  display: none;
+  margin-top: 0.5rem;
+}
+
+.modal-box .modal .enter-email input {
+  margin-top: 1rem;
+  outline: none;
+  background: rgba(255, 255, 255, 0.54);
+  border-radius: 3px;
+  min-height: 32px;
+  border: none;
+  padding: 0 0.5rem;
+  color: #292524;
+  font-size: 700;
+}
+
+.modal-box .modal .enter-email button {
+  min-height: 2rem;
+  border-radius: 5px;
+  background-color: #047857;
+  color: #fff;
+  border: none;
+  outline: none;
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  transition: .2s;
+  margin-top: 1rem;
+  width: fit-content;
+}
+
+.modal-box .modal .enter-email button:hover {
+  cursor: pointer;
+  background-color: #059669;
+  transition: .2s;
+}
+
+.modal-box .modal .modal-body {
+  padding: 1rem 2rem;
+  line-height: 20px;
+  display: none;
+  flex-direction: column;
+}
+
+.modal-box .modal .modal-body p {
+  margin-bottom: 1rem;
+}
+
+.modal-box .modal .modal-body .prize-text {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.modal-box .modal .modal-body .prize-phone {
+  font-size: 1rem;
+}
+
+.modal-box .modal .modal-body .phone-input {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-box .modal .modal-body .phone-input input {
+  outline: none;
+  background: rgba(255, 255, 255, 0.54);
+  border-radius: 3px;
+  min-height: 32px;
+  border: none;
+  padding: 0 0.5rem;
+  color: #292524;
+  font-size: 700;
+  max-width: 150px;
+}
+
+.modal-box .modal .modal-body .phone-input button {
+  min-height: 2rem;
+  border-radius: 5px;
+  background-color: #047857;
+  color: #fff;
+  border: none;
+  outline: none;
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  transition: .2s;
+  margin-top: 1rem;
+  width: fit-content;
+}
+
+.modal-box .modal .modal-body .phone-input button:hover {
+  cursor: pointer;
+  background-color: #059669;
+  transition: .2s;
+}
+
 @media (max-width: 1440px) {
   html {
     font-size: 14px;
@@ -150,6 +289,9 @@ body {
 @media (max-width: 1240px) {
   html {
     font-size: 12px;
+  }
+  html body .modal-box .modal {
+    max-width: 60%;
   }
 }
 
@@ -294,6 +436,12 @@ body {
     margin-top: 70px;
     margin-bottom: 50px;
     font-size: 1.6rem;
+  }
+  html body .modal-box .modal {
+    max-width: 90%;
+  }
+  html body .modal-box .modal .modal-body {
+    line-height: 1;
   }
 }
 

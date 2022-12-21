@@ -120,6 +120,146 @@ body {
     }
 }
 
+.modal-box {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(2, 23, 14, 0.44);
+    backdrop-filter: blur(1.5px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    .modal {
+        width: fit-content;
+        height: fit-content;
+        max-width: 40%;
+        max-height: 80%;
+        background-color: #3FCB8D;
+        padding: 15px;
+        background: linear-gradient(180deg, #25895D 10%, #3FCB8D 100%);
+        box-shadow: 0px 6px 7px rgba(0, 0, 0, 0.25);
+        border-radius: 3px;
+
+        .modal-header {
+            display: flex;
+            justify-content: flex-end;
+            padding: 10px;
+
+            img:hover {
+                cursor: pointer;
+            }
+        }
+
+        .enter-email {
+            display: flex;
+            flex-direction: column;
+
+            .add-email {
+                margin-top: 1rem;
+            }
+
+            .email-error {
+                display: none;
+                margin-top: 0.5rem;
+            }
+
+            input {
+                margin-top: 1rem;
+                outline: none;
+                background: rgba(255, 255, 255, 0.54);
+                border-radius: 3px;
+                min-height: 32px;
+                border: none;
+                padding: 0 0.5rem;
+                color: #292524;
+                font-size: 700;
+            }
+
+            button {
+                min-height: 2rem;
+                border-radius: 5px;
+                background-color: #047857;
+                color: #fff;
+                border: none;
+                outline: none;
+                font-weight: 700;
+                padding: 0.5rem 1rem;
+                transition: .2s;
+                margin-top: 1rem;
+                width: fit-content;
+            }
+
+            button:hover {
+                cursor: pointer;
+                background-color: #059669;
+                transition: .2s;
+            }
+        }
+
+        .modal-body {
+            padding: 1rem 2rem;
+            line-height: 20px;
+            display: none;
+            flex-direction: column;
+
+            p {
+                margin-bottom: 1rem;
+            }
+
+            .prize-text {
+                font-weight: 700;
+                font-size: 1rem;
+            }
+
+            .prize-phone {
+                font-size: 1rem;
+            }
+
+            .phone-input {
+                display: flex;
+                flex-direction: column;
+
+                input {
+                    outline: none;
+                    background: rgba(255, 255, 255, 0.54);
+                    border-radius: 3px;
+                    min-height: 32px;
+                    border: none;
+                    padding: 0 0.5rem;
+                    color: #292524;
+                    font-size: 700;
+                    max-width: 150px;
+                }
+
+                button {
+                    min-height: 2rem;
+                    border-radius: 5px;
+                    background-color: #047857;
+                    color: #fff;
+                    border: none;
+                    outline: none;
+                    font-weight: 700;
+                    padding: 0.5rem 1rem;
+                    transition: .2s;
+                    margin-top: 1rem;
+                    width: fit-content;
+                }
+
+                button:hover {
+                    cursor: pointer;
+                    background-color: #059669;
+                    transition: .2s;
+                }
+            }
+
+        }
+    }
+}
+
 @media (max-width: 1440px) {
     html {
         font-size: 14px;
@@ -129,6 +269,14 @@ body {
 @media (max-width: 1240px) {
     html {
         font-size: 12px;
+
+        body {
+            .modal-box {
+                .modal {
+                    max-width: 60%;
+                }
+            }
+        }
     }
 }
 
@@ -264,6 +412,16 @@ body {
                         margin-top: 70px;
                         margin-bottom: 50px;
                         font-size: 1.6rem;
+                    }
+                }
+            }
+
+            .modal-box {
+                .modal {
+                    max-width: 90%;
+
+                    .modal-body {
+                        line-height: 1;
                     }
                 }
             }
