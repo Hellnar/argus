@@ -15,7 +15,7 @@ initializeApp(firebaseConfig)
 const db = getFirestore()
 handleBallClick()
 handleCloseModal()
-fillFirebase()
+// fillFirebase()
 
 
 // ============== DB REFS ====================
