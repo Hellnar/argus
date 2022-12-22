@@ -71,10 +71,19 @@ body {
   height: 26.0625rem;
 }
 
+.desktop .main-content .copyright {
+  text-align: center;
+  width: 100%;
+  padding: 0 0.5rem;
+  margin-top: 70px;
+  font-size: 1.2rem;
+}
+
 .desktop .tree {
   height: 100%;
   width: 100%;
   position: relative;
+  display: flex;
 }
 
 .desktop .tree .tree-img {
@@ -241,6 +250,10 @@ body {
 
 .modal-box .modal .modal-body .prize-phone {
   font-size: 1rem;
+}
+
+.modal-box .modal .modal-body .take-prize {
+  display: none;
 }
 
 .modal-box .modal .modal-body .phone-input {
