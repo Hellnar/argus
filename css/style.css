@@ -501,16 +501,6 @@ body {
     font-size: 10px;
   }
 
-  body {
-    overflow-x: hidden;
-  }
-
-  .mobile {
-    overflow-x: hidden;
-    overflow-y: auto;
-  }
-
-
   html body .mobile .logo {
     padding: 20px 0 150px 0;
     max-width: 256px;
@@ -568,6 +558,7 @@ body {
 
   html body .mobile .tree-img-mob .ball {
     position: absolute;
+    cursor: pointer;
   }
 
   .ball img {
