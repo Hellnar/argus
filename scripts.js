@@ -24,6 +24,7 @@ if (!iOS()) {
 
 async function initPrize(user) {
     const prize = await choosePrize(user)
+    document.querySelector(".prize-text").style.display = "block"
     document.querySelector(".prize-text").innerText = `Ура! ${prize}`
 }
 
@@ -111,12 +112,14 @@ function submitEmail() {
             loader.style.display = "flex"
             document.querySelector(".enter-email").style.display = "none"
             const user = await checkEmail(e.target[0].value)
+            loader.style.display = "none"
             if(user === null) {
                 userDoesntExist()
             } else {
                 document.querySelector(".enter-email").style.display = "none"
                 if(!user.active) {
                     document.querySelector(".prize-text").innerText = `Поздравляем! Вы уже выиграли ${user.prize}!`
+                    document.querySelector(".prize-text").style.display = "идщсл"
                     if(user.prize === "шоколадку" || user.prize === "украшение") {
                         document.querySelector(".prize-phone").style.display = "block"
                         document.querySelector(".user-phone").style.display = "block"
@@ -178,6 +181,7 @@ function resetModal() {
     document.querySelector(".enter-email").style.display = "flex"
     document.querySelector(".enter-email input").value = ""
     document.querySelector(".add-email").style.display = "block"
+    document.querySelector(".add-email").textContent = "Для новогоднего чуда введите email на который Вы получили нашу рассылку"
     document.querySelector(".email-error").style.display = "none"
 }
 
@@ -204,3 +208,12 @@ function iOS() {
     // iPad on iOS 13 detection
     || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
   }
+
+
+// ============== EVENTS ====================
+
+document.addEventListener("click", (e) => {
+    if(e.target.classList.contains("modal-box")) {
+        document.querySelector(".modal-box").style.display = "none"
+    }
+})
