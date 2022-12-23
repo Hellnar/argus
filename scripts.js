@@ -141,6 +141,8 @@ async function checkEmail(email) {
 
 function userDoesntExist() {
     document.querySelector(".email-error").style.display = "block"
+    document.querySelector(".add-email").style.display = "block"
+    document.querySelector(".enter-email").style.display = "flex"
     document.querySelector(".add-email").textContent = "Упс! У Деда Мороза нет такого Email адреса"
 }
 

@@ -98,11 +98,11 @@
 }
 
 function submitEmail() {
-    const loader = document.querySelector("#loader")
+    const loader = document.querySelector("#loader") //eto
     document.querySelector(".enter-email").addEventListener("submit", async (e) => {
         e.preventDefault()
-        loader.style.display = "flex"
-        document.querySelector(".enter-email").style.display = "none"
+        loader.style.display = "flex" // eto
+        document.querySelector(".enter-email").style.display = "none" // eto
         const user = await checkEmail(e.target[0].value)
         if(user === null) {
             userDoesntExist()
@@ -125,7 +125,7 @@ function submitEmail() {
             document.querySelector(".enter-email").style.display = "none"
             document.querySelector(".modal-body").style.display = "flex"
         }
-        loader.style.display = "none"
+        loader.style.display = "none" // eto
     })
 }
 
