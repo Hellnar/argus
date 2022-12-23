@@ -144,6 +144,12 @@ function handleBallClick() {
     })
 }
 
+function ballClick() {
+    resetModal()
+    submitEmail()
+    document.querySelector(".modal-box").style.display = "flex"
+}
+
 function resetModal() {
     document.querySelector(".enter-email").style.display = "flex"
     document.querySelector(".modal-body").style.display = "none"
