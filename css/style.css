@@ -567,9 +567,12 @@ body {
   }
 
   html body .mobile .tree-img-mob .ball {
+    position: absolute;
+  }
+
+  .ball img {
     width: 9rem;
     height: auto;
-    position: absolute;
   }
 
   html body .mobile .tree-img-mob .ball:nth-child(2) {

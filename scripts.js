@@ -13,13 +13,7 @@ let USER_ID = ""
 
 initializeApp(firebaseConfig)
 const db = getFirestore()
-
-if (iOS()) {
-    handleBallClickMobile()
-} else {
-    handleBallClick()
-}
-
+handleBallClick()
 handleCloseModal()
 // fillFirebase()
 
@@ -150,18 +144,6 @@ function handleBallClick() {
     })
 }
 
-function handleBallClickMobile() {
-    document.querySelectorAll(".ball").forEach(ball => {
-        ball.addEventListener("touchstart", (event) => {
-            event.stopPropagation();
-            event.preventDefault();
-            resetModal()
-            submitEmail()
-            document.querySelector(".modal-box").style.display = "flex"
-        })
-    })
-}
-
 function resetModal() {
     document.querySelector(".enter-email").style.display = "flex"
     document.querySelector(".modal-body").style.display = "none"
@@ -205,16 +187,3 @@ function fillFirebase() {
     })
     batch.commit()
 }
-
-function iOS() {
-    return [
-      'iPad Simulator',
-      'iPhone Simulator',
-      'iPod Simulator',
-      'iPad',
-      'iPhone',
-      'iPod'
-    ].includes(navigator.platform)
-    // iPad on iOS 13 detection
-    || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
-  }
