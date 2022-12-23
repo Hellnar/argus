@@ -44,7 +44,7 @@ async function choosePrize(user) {
         document.querySelector(".take-prize").style.display = "block"
         return `Вы выиграли ${randomInfinitePrize}!`
     }
-    const randomNum = random(1, 7)
+    const randomNum = random(1, 200)
     if(prizes.jewelry > 0) {
         console.log(`Try jewelry`)
         if(randomNum === 5) {
