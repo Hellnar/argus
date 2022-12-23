@@ -46,13 +46,13 @@
         </div>
         <div class="tree-img-mob">
             <img class="tree-img" src="./assets/tree_mobile.png" alt="New Year Tree">
-            <div class="ball" onclick="() => null"><img src="./assets/ball.png" alt="Ball"></div>
-            <div class="ball" onclick="() => null"><img src="./assets/ball.png" alt="Ball"></div>
-            <div class="ball" onclick="() => null"><img src="./assets/ball.png" alt="Ball"></div>
-            <div class="ball" onclick="() => null"><img src="./assets/ball.png" alt="Ball"></div>
-            <div class="ball" onclick="() => null"><img src="./assets/ball.png" alt="Ball"></div>
-            <div class="ball" onclick="() => null"><img src="./assets/ball.png" alt="Ball"></div>
-            <div class="ball" onclick="() => null"><img src="./assets/ball.png" alt="Ball"></div>
+            <div class="ball" onclick="onBallClick"><img src="./assets/ball.png" alt="Ball"></div>
+            <div class="ball" onclick="onBallClick"><img src="./assets/ball.png" alt="Ball"></div>
+            <div class="ball" onclick="onBallClick"><img src="./assets/ball.png" alt="Ball"></div>
+            <div class="ball" onclick="onBallClick"><img src="./assets/ball.png" alt="Ball"></div>
+            <div class="ball" onclick="onBallClick"><img src="./assets/ball.png" alt="Ball"></div>
+            <div class="ball" onclick="onBallClick"><img src="./assets/ball.png" alt="Ball"></div>
+            <div class="ball" onclick="onBallClick"><img src="./assets/ball.png" alt="Ball"></div>
             <div class="greeting-box">
                 <img class="greeting" src="./assets/greeting.svg" alt="Greeting">
                 <p class="copyright">2022, группа компаний "АРГУС" (с)</p>
@@ -84,5 +84,48 @@
         </div>
     </div>
     <script src="./scripts.js" type="module"></script>
+    <script>
+        function resetModal() {
+    document.querySelector(".enter-email").style.display = "flex"
+    document.querySelector(".modal-body").style.display = "none"
+    document.querySelector(".enter-email input").value = ""
+    document.querySelector(".enter-email input").value = ""
+    // document.querySelector("#phone").value = ""
+}
+
+function submitEmail() {
+    document.querySelector(".enter-email").addEventListener("submit", async (e) => {
+        e.preventDefault()
+        const user = await checkEmail(e.target[0].value)
+        if(user === null) {
+            userDoesntExist()
+        } else {
+            document.querySelector(".enter-email").style.display = "none"
+            if(!user.active) {
+                document.querySelector(".prize-text").innerText = `Поздравляем! Вы уже выиграли ${user.prize}!`
+                if(user.prize === "шоколадку" || user.prize === "украшение") {
+                    document.querySelector(".prize-phone").style.display = "block"
+                    document.querySelector(".user-phone").style.display = "block"
+                    document.querySelector(".take-prize").style.display = "none"
+                } else {
+                    document.querySelector(".prize-phone").style.display = "none"
+                    document.querySelector(".user-phone").style.display = "none"
+                    document.querySelector(".take-prize").style.display = "block"
+                }
+            } else {
+                initPrize(user)
+            }
+            document.querySelector(".enter-email").style.display = "none"
+            document.querySelector(".modal-body").style.display = "flex"
+        }
+    })
+}
+
+    function onBallClick() {
+        resetModal()
+        submitEmail()
+        document.querySelector(".modal-box").style.display = "flex"
+    }
+    </script>
 </body>
 </html>
