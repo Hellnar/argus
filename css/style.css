@@ -362,7 +362,8 @@ body {
     align-items: center;
     width: 100%;
     position: relative;
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 
   html body .mobile .logo {
