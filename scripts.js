@@ -136,7 +136,7 @@ function userDoesntExist() {
 
 function handleBallClick() {
     document.querySelectorAll(".ball").forEach(ball => {
-        ball.addEventListener("click touchstart", () => {
+        ball.addEventListener("click", () => {
             resetModal()
             submitEmail()
             document.querySelector(".modal-box").style.display = "flex"
