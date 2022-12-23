@@ -73,7 +73,7 @@ async function choosePrize(user) {
 
 async function getPrizes() {
 
-    const prizes = await fetch("https://argus-server.onrender.com/api/prizes/", {
+    const prizes = await fetch("http://3.222.117.165/api/prizes/", {
         method: "GET"
     })
     const prizesJSON = await prizes.json()
@@ -82,7 +82,7 @@ async function getPrizes() {
 
 async function updateUser(user, prize, chocolate, jewelry) {
     
-    const userPatch = await fetch("https://argus-server.onrender.com/api/users/", {
+    const userPatch = await fetch("http://3.222.117.165/api/users/", {
         method: "PATCH",
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
@@ -136,7 +136,7 @@ function submitEmail() {
 
 async function checkEmail(email) {
     console.log(`check email`)
-    const user = await fetch("https://argus-server.onrender.com/api/users/", {
+    const user = await fetch("http://3.222.117.165/api/users/", {
         method: "POST",
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({email: email})
