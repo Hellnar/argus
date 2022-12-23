@@ -13,7 +13,7 @@ let USER_ID = ""
 
 initializeApp(firebaseConfig)
 const db = getFirestore()
-// handleBallClick()
+handleBallClick()
 handleCloseModal()
 // fillFirebase()
 
@@ -136,18 +136,12 @@ function userDoesntExist() {
 
 function handleBallClick() {
     document.querySelectorAll(".ball").forEach(ball => {
-        ball.addEventListener("click", () => {
+        ball.addEventListener("click touchstart", () => {
             resetModal()
             submitEmail()
             document.querySelector(".modal-box").style.display = "flex"
         })
     })
-}
-
-export const ballClick = () => {
-    resetModal()
-    submitEmail()
-    document.querySelector(".modal-box").style.display = "flex"
 }
 
 function resetModal() {
