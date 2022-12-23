@@ -88,6 +88,7 @@ body {
 }
 
 .desktop .tree .tree-img {
+  object-fit: none;
   width: 55.5625rem;
   scale: 1.1;
   height: 64rem;
@@ -640,6 +641,30 @@ body {
 @media (max-width: 390px) {
   html {
     font-size: 8px;
+  }
+}
+
+@media (min-height: 1075px) {
+  .desktop {
+    transform: translate(-5%, 20%);
+  }
+
+  .tree {
+    height: max-content !important;
+  }
+
+  .tree-img {
+    height: auto !important;
+    margin-top: -35% !important;
+    width: 64rem !important;
+  }
+
+  .ball {
+    margin-left: 85px !important;
+  }
+
+  .lights {
+    left: -18.1rem !important;
   }
 }
 
