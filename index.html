@@ -71,6 +71,10 @@
                 <input type="email" name="" id="">
                 <button type="submit" class="send-email">Send</button>
             </form>
+            <div id='loader'>
+                <p><strong>Подождите, Дед Мороз ищет Ваш подарок</strong></p>
+              <img src="./assets/book-loading.gif" alt="Loader">
+            </div>
             <div class="modal-body">
                 <p class="prize-text"></p>
                 <p class="prize-phone">Приезжайте в наш уютный офис и заберите свой подарок. Наш адрес: Проспект Маршала Жукова, дом 2, офис 227 (2-й этаж).</p>
@@ -94,8 +98,11 @@
 }
 
 function submitEmail() {
+    const loader = document.querySelector("#loader")
     document.querySelector(".enter-email").addEventListener("submit", async (e) => {
         e.preventDefault()
+        loader.style.display = "flex"
+        document.querySelector(".enter-email").style.display = "none"
         const user = await checkEmail(e.target[0].value)
         if(user === null) {
             userDoesntExist()
@@ -118,6 +125,7 @@ function submitEmail() {
             document.querySelector(".enter-email").style.display = "none"
             document.querySelector(".modal-body").style.display = "flex"
         }
+        loader.style.display = "none"
     })
 }
 

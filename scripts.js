@@ -40,7 +40,7 @@ async function choosePrize(user) {
         await updateUser(user, prize, 0, 0)
         return `Вы выиграли ${randomInfinitePrize}!`
     }
-    const randomNum = random(1, 7)
+    const randomNum = random(1, 200)
     if(prizes.jewelry > 0) {
         if(randomNum === 5) {
             // updateDoc(prizesRef, {jewelry: prizes.jewelry - 1})
@@ -101,9 +101,12 @@ async function updateUser(user, prize, chocolate, jewelry) {
 
 function submitEmail() {
     if(!EVENT_LISTENER) {
+        const loader = document.querySelector("#loader")
         document.querySelector(".enter-email").addEventListener("submit", async (e) => {
             EVENT_LISTENER = true
             e.preventDefault()
+            loader.style.display = "flex"
+            document.querySelector(".enter-email").style.display = "none"
             const user = await checkEmail(e.target[0].value)
             if(user === null) {
                 userDoesntExist()
@@ -129,6 +132,23 @@ function submitEmail() {
         })
     }
 }
+
+  // const loader = document.querySelector("#loader")
+    // document.querySelector(".enter-email").addEventListener("submit", async (e) => {
+    //     e.preventDefault()
+    //     loader.style.display = "flex"
+    //     document.querySelector(".enter-email").style.display = "none"
+    //     const user = await checkEmail(e.target[0].value)
+    //     if(user === null) {
+    //         userDoesntExist()
+    //     } else {
+    //         document.querySelector(".enter-email").style.display = "none"
+    //         if(!user.active) {
+    //             document.querySelector(".prize-text").innerText = `Поздравляем! Вы уже выиграли ${user.prize}!`
+    //             if(user.prize === "шоколадку" || user.prize === "украшение") {
+    //                 document.querySelector(".prize-phone").style.display = "block"
+    //                 document.querySelector(".user-phone").style.display = "block"
+    //                 document.querySelector(".take-prize").style.display = "none"
 
 async function checkEmail(email) {
     console.log(`check email`)
