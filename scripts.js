@@ -96,6 +96,7 @@ function submitEmail() {
         if(user === null) {
             userDoesntExist()
         } else {
+            document.querySelector(".enter-email").style.display = "none"
             if(!user.active) {
                 document.querySelector(".prize-text").innerText = `Поздравляем! Вы уже выиграли ${user.prize}!`
                 if(user.prize === "шоколадку" || user.prize === "украшение") {
@@ -126,6 +127,7 @@ async function checkEmail(email) {
 
 function userDoesntExist() {
     document.querySelector(".email-error").style.display = "block"
+    document.querySelector(".add-email").textContent = "Упс! У Деда Мороза нет такого Email адреса"
 }
 
 
@@ -153,6 +155,8 @@ function resetModal() {
 function handleCloseModal() {
     document.querySelector(".close").addEventListener("click", () => {
         document.querySelector(".modal-box").style.display = "none"
+        document.querySelector(".add-email").textContent = "Для новогоднего чуда введите ваш e-mail:"
+        document.querySelector(".email-error").style.display = "none"
     })
 }
 
