@@ -152,7 +152,9 @@ function handleBallClick() {
 
 function handleBallClickMobile() {
     document.querySelectorAll(".ball").forEach(ball => {
-        ball.addEventListener("touchstart", () => {
+        ball.addEventListener("touchstart", (event) => {
+            event.stopPropagation();
+            event.preventDefault();
             resetModal()
             submitEmail()
             document.querySelector(".modal-box").style.display = "flex"
