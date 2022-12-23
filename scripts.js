@@ -40,6 +40,7 @@ async function choosePrize(user) {
         document.querySelector(".user-phone").style.display = "none"
         prize = randomInfinitePrize
         await updateUser(user, prize, 0, 0)
+        loader.style.display = "none"
         document.querySelector(".take-prize").style.display = "block"
         return `Вы выиграли ${randomInfinitePrize}!`
     }
@@ -50,6 +51,7 @@ async function choosePrize(user) {
             document.querySelector(".take-prize").style.display = "none"
             prize = "украшение"
             await updateUser(user, prize, 0, -1)
+            loader.style.display = "none"
             document.querySelector(".prize-phone").style.display = "block"
             document.querySelector(".user-phone").style.display = "block"
             return `Вы выиграли украшение и скидку 15%!`
@@ -61,6 +63,7 @@ async function choosePrize(user) {
             document.querySelector(".take-prize").style.display = "none"
             prize = "шоколадку"
             await updateUser(user, prize, -1, 0)
+            loader.style.display = "none"
             document.querySelector(".prize-phone").style.display = "block"
             document.querySelector(".user-phone").style.display = "block"
             return `Вы выиграли шоколадку и скидку 15%!`
@@ -71,6 +74,7 @@ async function choosePrize(user) {
     document.querySelector(".user-phone").style.display = "none"
     prize = randomInfinitePrize
     await updateUser(user, prize, 0, 0)
+    loader.style.display = "none"
     document.querySelector(".take-prize").style.display = "block"
     return `Вы выиграли ${randomInfinitePrize}!`
 }
@@ -112,19 +116,22 @@ function submitEmail() {
             loader.style.display = "flex"
             document.querySelector(".enter-email").style.display = "none"
             const user = await checkEmail(e.target[0].value)
-            loader.style.display = "none"
+            // loader.style.display = "none"
             if(user === null) {
                 userDoesntExist()
             } else {
                 document.querySelector(".enter-email").style.display = "none"
                 if(!user.active) {
+                    loader.style.display = "none"
                     document.querySelector(".prize-text").innerText = `Поздравляем! Вы уже выиграли ${user.prize}!`
-                    document.querySelector(".prize-text").style.display = "идщсл"
+                    document.querySelector(".prize-text").style.display = "block"
                     if(user.prize === "шоколадку" || user.prize === "украшение") {
+                        loader.style.display = "none"
                         document.querySelector(".prize-phone").style.display = "block"
                         document.querySelector(".user-phone").style.display = "block"
                         document.querySelector(".take-prize").style.display = "none"
                     } else {
+                        loader.style.display = "none"
                         document.querySelector(".prize-phone").style.display = "none"
                         document.querySelector(".user-phone").style.display = "none"
                         document.querySelector(".take-prize").style.display = "block"
@@ -151,6 +158,7 @@ async function checkEmail(email) {
 }
 
 function userDoesntExist() {
+    loader.style.display = "none"
     document.querySelector(".email-error").style.display = "block"
     document.querySelector(".add-email").style.display = "block"
     document.querySelector(".enter-email").style.display = "flex"
