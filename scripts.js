@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"
-import { getFirestore, collection, getDocs, updateDoc, doc, query, where, writeBatch } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js"
+import { getFirestore, collection, getDocs, updateDoc, doc, query, where, writeBatch, getDoc } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js"
 import * as EMAILS from './testmails.json' assert { type: "json" }
 const firebaseConfig = {
     apiKey: "AIzaSyCOQhsXWANNs3Shl_HmNzF0SeWXTpAH5EI",
@@ -36,34 +36,35 @@ async function choosePrize(user) {
     const prizes = await getPrizes()
     const randomInfinitePrize = randomFromArray(prizes.infinite)
     let prize = ""
+    console.log(user)
     if(prizes.jewelry === 0 && prizes.chocolate === 0) {
         document.querySelector(".prize-phone").style.display = "none"
         document.querySelector(".user-phone").style.display = "none"
         document.querySelector(".take-prize").style.display = "block"
         prize = randomInfinitePrize
-        await updateUser(user, prize)
+        await updateUser(user, prize, 0, 0)
         return `Вы выиграли ${randomInfinitePrize}!`
     }
     const randomNum = random(1, 7)
     if(prizes.jewelry > 0) {
         if(randomNum === 5) {
-            updateDoc(prizesRef, {jewelry: prizes.jewelry - 1})
+            // updateDoc(prizesRef, {jewelry: prizes.jewelry - 1})
             document.querySelector(".prize-phone").style.display = "block"
             document.querySelector(".user-phone").style.display = "block"
             document.querySelector(".take-prize").style.display = "none"
             prize = "украшение"
-            await updateUser(user, prize)
+            await updateUser(user, prize, 0, -1)
             return `Вы выиграли украшение и скидку 15%!`
         }
     }
     if(prizes.chocolate > 0) {
         if(randomNum === 6) {
-            updateDoc(prizesRef, {chocolate: prizes.chocolate - 1})
+            // updateDoc(prizesRef, {chocolate: prizes.chocolate - 1})
             document.querySelector(".prize-phone").style.display = "block"
             document.querySelector(".user-phone").style.display = "block"
             document.querySelector(".take-prize").style.display = "none"
             prize = "шоколадку"
-            await updateUser(user, prize)
+            await updateUser(user, prize, -1, 0)
             return `Вы выиграли шоколадку и скидку 15%!`
         }
     }
@@ -71,18 +72,36 @@ async function choosePrize(user) {
     document.querySelector(".user-phone").style.display = "none"
     document.querySelector(".take-prize").style.display = "block"
     prize = randomInfinitePrize
-    await updateUser(user, prize)
+    await updateUser(user, prize, 0, 0)
     return `Вы выиграли ${randomInfinitePrize}!`
 }
 
 async function getPrizes() {
-    const response = await getDocs(collection(db, "prizes"))
-    return response.docs[0].data()
+    // const response = await getDocs(collection(db, "prizes"))
+    // return response.docs[0].data()
+
+    const prizes = await fetch("https://argus-server.onrender.com/api/prizes/", {
+        method: "GET"
+    })
+    const prizesJSON = await prizes.json()
+    return prizesJSON.prizes[0]
 }
 
-async function updateUser(user, prize) {
-    const userRef = doc(db, "users", USER_ID)
-    updateDoc(userRef, {prize: prize, active: false})
+async function updateUser(user, prize, chocolate, jewelry) {
+    // const userRef = doc(db, "users", USER_ID)
+    // updateDoc(userRef, {prize: prize, active: false})
+    
+    const userPatch = await fetch("https://argus-server.onrender.com/api/users/", {
+        method: "PATCH",
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            email: user.email,
+            prize: prize,
+            chocolate: chocolate,
+            jewelry: jewelry
+        })
+    })
+    const userJSON = await userPatch.json()
 }
 
 
@@ -117,15 +136,18 @@ function submitEmail() {
 }
 
 async function checkEmail(email) {
-    const findEmail = await query(usersRef, where("email", "==", email))
-    const user = await getDocs(findEmail)
-    if(user.docs.length <= 0) return null
-    USER_ID = user.docs[0].id
-    return user.docs.length > 0 ? user.docs[0].data() : null
+    const user = await fetch("https://argus-server.onrender.com/api/users/", {
+        method: "POST",
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({email: email})
+    })
+    const userJSON = await user.json()
+    return !userJSON.data ? null : userJSON.data
 }
 
 function userDoesntExist() {
     document.querySelector(".email-error").style.display = "block"
+    document.querySelector(".add-email").style.display = "none"
 }
 
 
@@ -147,6 +169,8 @@ function resetModal() {
     document.querySelector(".modal-body").style.display = "none"
     document.querySelector(".enter-email input").value = ""
     document.querySelector(".enter-email input").value = ""
+    document.querySelector(".add-email").style.display = "block"
+    document.querySelector(".email-error").style.display = "none"
     // document.querySelector("#phone").value = ""
 }
 
@@ -168,18 +192,18 @@ function randomFromArray(items) {
     return items[Math.floor(Math.random()*items.length)]
 }
 
-function fillFirebase() {
-    const users = EMAILS.default.map(email => {
-        return {
-            email: email,
-            active: true,
-            prize: ""
-        }
-    })
-    const batch = writeBatch(db)
-    users.forEach((user) => {
-        const docRef = doc(collection(db, "users"))
-        batch.set(docRef, user);
-    })
-    batch.commit()
-}
+// function fillFirebase() {
+//     const users = EMAILS.default.map(email => {
+//         return {
+//             email: email,
+//             active: true,
+//             prize: ""
+//         }
+//     })
+//     const batch = writeBatch(db)
+//     users.forEach((user) => {
+//         const docRef = doc(collection(db, "users"))
+//         batch.set(docRef, user);
+//     })
+//     batch.commit()
+// }
