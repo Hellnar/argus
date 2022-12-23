@@ -28,46 +28,49 @@ async function initPrize(user) {
 }
 
 async function choosePrize(user) {
+    console.log(`Choose prize`)
     const prizes = await getPrizes()
     const randomInfinitePrize = randomFromArray(prizes.infinite)
     let prize = ""
     console.log(user)
     if(prizes.jewelry === 0 && prizes.chocolate === 0) {
+        console.log(`Give random`)
         document.querySelector(".prize-phone").style.display = "none"
         document.querySelector(".user-phone").style.display = "none"
-        document.querySelector(".take-prize").style.display = "block"
         prize = randomInfinitePrize
         await updateUser(user, prize, 0, 0)
+        document.querySelector(".take-prize").style.display = "block"
         return `Вы выиграли ${randomInfinitePrize}!`
     }
-    const randomNum = random(1, 200)
+    const randomNum = random(1, 7)
     if(prizes.jewelry > 0) {
+        console.log(`Try jewelry`)
         if(randomNum === 5) {
-            // updateDoc(prizesRef, {jewelry: prizes.jewelry - 1})
-            document.querySelector(".prize-phone").style.display = "block"
-            document.querySelector(".user-phone").style.display = "block"
             document.querySelector(".take-prize").style.display = "none"
             prize = "украшение"
             await updateUser(user, prize, 0, -1)
+            document.querySelector(".prize-phone").style.display = "block"
+            document.querySelector(".user-phone").style.display = "block"
             return `Вы выиграли украшение и скидку 15%!`
         }
     }
     if(prizes.chocolate > 0) {
+        console.log(`Try choco`)
         if(randomNum === 6) {
-            // updateDoc(prizesRef, {chocolate: prizes.chocolate - 1})
-            document.querySelector(".prize-phone").style.display = "block"
-            document.querySelector(".user-phone").style.display = "block"
             document.querySelector(".take-prize").style.display = "none"
             prize = "шоколадку"
             await updateUser(user, prize, -1, 0)
+            document.querySelector(".prize-phone").style.display = "block"
+            document.querySelector(".user-phone").style.display = "block"
             return `Вы выиграли шоколадку и скидку 15%!`
         }
     }
+    console.log(`Left last`)
     document.querySelector(".prize-phone").style.display = "none"
     document.querySelector(".user-phone").style.display = "none"
-    document.querySelector(".take-prize").style.display = "block"
     prize = randomInfinitePrize
     await updateUser(user, prize, 0, 0)
+    document.querySelector(".take-prize").style.display = "block"
     return `Вы выиграли ${randomInfinitePrize}!`
 }
 
@@ -128,6 +131,7 @@ function submitEmail() {
                 }
                 document.querySelector(".enter-email").style.display = "none"
                 document.querySelector(".modal-body").style.display = "flex"
+                document.querySelector(".take-prize").style.display = "none"
             }
         })
     }
@@ -151,7 +155,6 @@ function submitEmail() {
     //                 document.querySelector(".take-prize").style.display = "none"
 
 async function checkEmail(email) {
-    console.log(`check email`)
     const user = await fetch("https://argus-server.onrender.com/api/users/", {
         method: "POST",
         headers: {'Content-Type': 'application/json'},
@@ -181,13 +184,16 @@ function handleBallClick() {
 }
 
 function resetModal() {
-    document.querySelector(".enter-email").style.display = "flex"
     document.querySelector(".modal-body").style.display = "none"
-    document.querySelector(".enter-email input").value = ""
+    document.querySelector(".prize-text").style.display = "none"
+    document.querySelector(".prize-text").innerText = ""
+    document.querySelector(".user-phone").style.display = "none"
+    document.querySelector(".take-prize").style.display = "none"
+    document.querySelector(".prize-phone").style.display = "none"
+    document.querySelector(".enter-email").style.display = "flex"
     document.querySelector(".enter-email input").value = ""
     document.querySelector(".add-email").style.display = "block"
     document.querySelector(".email-error").style.display = "none"
-    // document.querySelector("#phone").value = ""
 }
 
 
