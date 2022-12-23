@@ -1,18 +1,20 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"
-import { getFirestore, collection, getDocs, updateDoc, doc, query, where, writeBatch, getDoc } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js"
-import * as EMAILS from './testmails.json' assert { type: "json" }
-const firebaseConfig = {
-    apiKey: "AIzaSyCOQhsXWANNs3Shl_HmNzF0SeWXTpAH5EI",
-    authDomain: "argus-1a2aa.firebaseapp.com",
-    projectId: "argus-1a2aa",
-    storageBucket: "argus-1a2aa.appspot.com",
-    messagingSenderId: "628663199277",
-    appId: "1:628663199277:web:d5ac86c6bc2491ec5fbaa4"
-}
-let USER_ID = ""
+// import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"
+// import { getFirestore, collection, getDocs, updateDoc, doc, query, where, writeBatch, getDoc } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js"
 
-initializeApp(firebaseConfig)
-const db = getFirestore()
+// const firebaseConfig = {
+//     apiKey: "AIzaSyCOQhsXWANNs3Shl_HmNzF0SeWXTpAH5EI",
+//     authDomain: "argus-1a2aa.firebaseapp.com",
+//     projectId: "argus-1a2aa",
+//     storageBucket: "argus-1a2aa.appspot.com",
+//     messagingSenderId: "628663199277",
+//     appId: "1:628663199277:web:d5ac86c6bc2491ec5fbaa4"
+// }
+// let USER_ID = ""
+
+// initializeApp(firebaseConfig)
+// const db = getFirestore()
+
+let EVENT_LISTENER = false
 
 if (!iOS()) {
     handleBallClick()
@@ -38,7 +40,7 @@ async function choosePrize(user) {
         await updateUser(user, prize, 0, 0)
         return `Вы выиграли ${randomInfinitePrize}!`
     }
-    const randomNum = random(1, 7)
+    const randomNum = random(1, 200)
     if(prizes.jewelry > 0) {
         if(randomNum === 5) {
             // updateDoc(prizesRef, {jewelry: prizes.jewelry - 1})
@@ -98,38 +100,58 @@ async function updateUser(user, prize, chocolate, jewelry) {
 // ============== CHECK EMAIL ====================
 
 function submitEmail() {
-    const loader = document.querySelector("#loader")
-    document.querySelector(".enter-email").addEventListener("submit", async (e) => {
-        e.preventDefault()
-        loader.style.display = "flex"
-        document.querySelector(".enter-email").style.display = "none"
-        const user = await checkEmail(e.target[0].value)
-        if(user === null) {
-            userDoesntExist()
-        } else {
+    if(!EVENT_LISTENER) {
+        const loader = document.querySelector("#loader")
+        document.querySelector(".enter-email").addEventListener("submit", async (e) => {
+            EVENT_LISTENER = true
+            e.preventDefault()
+            loader.style.display = "flex"
             document.querySelector(".enter-email").style.display = "none"
-            if(!user.active) {
-                document.querySelector(".prize-text").innerText = `Поздравляем! Вы уже выиграли ${user.prize}!`
-                if(user.prize === "шоколадку" || user.prize === "украшение") {
-                    document.querySelector(".prize-phone").style.display = "block"
-                    document.querySelector(".user-phone").style.display = "block"
-                    document.querySelector(".take-prize").style.display = "none"
-                } else {
-                    document.querySelector(".prize-phone").style.display = "none"
-                    document.querySelector(".user-phone").style.display = "none"
-                    document.querySelector(".take-prize").style.display = "block"
-                }
+            const user = await checkEmail(e.target[0].value)
+            if(user === null) {
+                userDoesntExist()
             } else {
-                initPrize(user)
+                document.querySelector(".enter-email").style.display = "none"
+                if(!user.active) {
+                    document.querySelector(".prize-text").innerText = `Поздравляем! Вы уже выиграли ${user.prize}!`
+                    if(user.prize === "шоколадку" || user.prize === "украшение") {
+                        document.querySelector(".prize-phone").style.display = "block"
+                        document.querySelector(".user-phone").style.display = "block"
+                        document.querySelector(".take-prize").style.display = "none"
+                    } else {
+                        document.querySelector(".prize-phone").style.display = "none"
+                        document.querySelector(".user-phone").style.display = "none"
+                        document.querySelector(".take-prize").style.display = "block"
+                    }
+                } else {
+                    initPrize(user)
+                }
+                document.querySelector(".enter-email").style.display = "none"
+                document.querySelector(".modal-body").style.display = "flex"
             }
-            document.querySelector(".enter-email").style.display = "none"
-            document.querySelector(".modal-body").style.display = "flex"
-        }
-        loader.style.display = "none"
-    })
+        })
+    }
 }
 
+  // const loader = document.querySelector("#loader")
+    // document.querySelector(".enter-email").addEventListener("submit", async (e) => {
+    //     e.preventDefault()
+    //     loader.style.display = "flex"
+    //     document.querySelector(".enter-email").style.display = "none"
+    //     const user = await checkEmail(e.target[0].value)
+    //     if(user === null) {
+    //         userDoesntExist()
+    //     } else {
+    //         document.querySelector(".enter-email").style.display = "none"
+    //         if(!user.active) {
+    //             document.querySelector(".prize-text").innerText = `Поздравляем! Вы уже выиграли ${user.prize}!`
+    //             if(user.prize === "шоколадку" || user.prize === "украшение") {
+    //                 document.querySelector(".prize-phone").style.display = "block"
+    //                 document.querySelector(".user-phone").style.display = "block"
+    //                 document.querySelector(".take-prize").style.display = "none"
+
 async function checkEmail(email) {
+    console.log(`check email`)
     const user = await fetch("https://argus-server.onrender.com/api/users/", {
         method: "POST",
         headers: {'Content-Type': 'application/json'},
