@@ -13,17 +13,10 @@ let USER_ID = ""
 
 initializeApp(firebaseConfig)
 const db = getFirestore()
-handleBallClick()
-handleCloseModal()
-// fillFirebase()
 
-
-// ============== DB REFS ====================
-
-const prizesRef = doc(db, "prizes", "AcPRU8K5FoFnxiD1fMLQ")
-const usersRef = collection(db, "users")
-
-
+if (!iOS()) {
+    handleBallClick()
+}
 
 // ============== GIVE PRIZES ====================
 
@@ -77,8 +70,6 @@ async function choosePrize(user) {
 }
 
 async function getPrizes() {
-    // const response = await getDocs(collection(db, "prizes"))
-    // return response.docs[0].data()
 
     const prizes = await fetch("https://argus-server.onrender.com/api/prizes/", {
         method: "GET"
@@ -88,8 +79,6 @@ async function getPrizes() {
 }
 
 async function updateUser(user, prize, chocolate, jewelry) {
-    // const userRef = doc(db, "users", USER_ID)
-    // updateDoc(userRef, {prize: prize, active: false})
     
     const userPatch = await fetch("https://argus-server.onrender.com/api/users/", {
         method: "PATCH",
@@ -115,6 +104,7 @@ function submitEmail() {
         if(user === null) {
             userDoesntExist()
         } else {
+            document.querySelector(".enter-email").style.display = "none"
             if(!user.active) {
                 document.querySelector(".prize-text").innerText = `Поздравляем! Вы уже выиграли ${user.prize}!`
                 if(user.prize === "шоколадку" || user.prize === "украшение") {
@@ -147,7 +137,7 @@ async function checkEmail(email) {
 
 function userDoesntExist() {
     document.querySelector(".email-error").style.display = "block"
-    document.querySelector(".add-email").style.display = "none"
+    document.querySelector(".add-email").textContent = "Упс! У Деда Мороза нет такого Email адреса"
 }
 
 
@@ -174,13 +164,6 @@ function resetModal() {
     // document.querySelector("#phone").value = ""
 }
 
-function handleCloseModal() {
-    document.querySelector(".close").addEventListener("click", () => {
-        document.querySelector(".modal-box").style.display = "none"
-    })
-}
-
-
 
 // ============== UTILS ====================
 
@@ -192,18 +175,15 @@ function randomFromArray(items) {
     return items[Math.floor(Math.random()*items.length)]
 }
 
-// function fillFirebase() {
-//     const users = EMAILS.default.map(email => {
-//         return {
-//             email: email,
-//             active: true,
-//             prize: ""
-//         }
-//     })
-//     const batch = writeBatch(db)
-//     users.forEach((user) => {
-//         const docRef = doc(collection(db, "users"))
-//         batch.set(docRef, user);
-//     })
-//     batch.commit()
-// }
+function iOS() {
+    return [
+      'iPad Simulator',
+      'iPhone Simulator',
+      'iPod Simulator',
+      'iPad',
+      'iPhone',
+      'iPod'
+    ].includes(navigator.platform)
+    // iPad on iOS 13 detection
+    || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
+  }
