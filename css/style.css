@@ -349,7 +349,7 @@ body {
 
   html body {
     width: 100vw;
-    overflow: hidden;
+    overflow-x: hidden;
   }
 
   html body .desktop {
@@ -362,8 +362,6 @@ body {
     align-items: center;
     width: 100%;
     position: relative;
-    overflow-x: hidden;
-    overflow-y: auto;
   }
 
   html body .mobile .logo {
@@ -503,6 +501,15 @@ body {
     font-size: 10px;
   }
 
+  body {
+    overflow-x: hidden;
+  }
+
+  .mobile {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
 
   html body .mobile .logo {
     padding: 20px 0 150px 0;
@@ -513,7 +520,6 @@ body {
   html body .mobile .lights {
     position: absolute;
     top: 120px;
-    /* right: 50%; */
     left: 26rem;
     transform: translate(-50%, -50%);
     filter: drop-shadow(4px -4px 5px rgba(238, 240, 219, 0.3));
