@@ -46,16 +46,13 @@
         </div>
         <div class="tree-img-mob">
             <img class="tree-img" src="./assets/tree_mobile.png" alt="New Year Tree">
-            <a href="#" class="ball" onmousedown="ballClick()"><img src="./assets/ball.png" alt="Ball"></a>
-
-            <a href="#" class="ball" onmousedown="ballClick()"><img src="./assets/ball.png" alt="Ball"></a>
-
-            <a href="#" class="ball" onmousedown="ballClick()"><img src="./assets/ball.png" alt="Ball"></a>
-
-            <a href="#" class="ball" onmousedown="ballClick()"><img src="./assets/ball.png" alt="Ball"></a>
-            <a href="#" class="ball" onmousedown="ballClick()"><img src="./assets/ball.png" alt="Ball"></a>
-            <a href="#" class="ball" onmousedown="ballClick()"><img src="./assets/ball.png" alt="Ball"></a>
-            <a href="#" class="ball" onmousedown="ballClick()"><img src="./assets/ball.png" alt="Ball"></a>
+            <div class="ball" onclick="ballClick()"><img src="./assets/ball.png" alt="Ball"></div>
+            <div class="ball" onclick="ballClick()"><img src="./assets/ball.png" alt="Ball"></div>
+            <div class="ball" onclick="ballClick()"><img src="./assets/ball.png" alt="Ball"></div>
+            <div class="ball" onclick="ballClick()"><img src="./assets/ball.png" alt="Ball"></div>
+            <div class="ball" onclick="ballClick()"><img src="./assets/ball.png" alt="Ball"></div>
+            <div class="ball" onclick="ballClick()"><img src="./assets/ball.png" alt="Ball"></div>
+            <div class="ball" onclick="ballClick()"><img src="./assets/ball.png" alt="Ball"></div>
             <div class="greeting-box">
                 <img class="greeting" src="./assets/greeting.svg" alt="Greeting">
                 <p class="copyright">2022, группа компаний "АРГУС" (с)</p>
@@ -87,5 +84,10 @@
         </div>
     </div>
     <script src="./scripts.js" type="module"></script>
+    <script>
+        function ballClick() {
+            alert('Выберите 1 из 7-ми елочных шаров, нажмите на него для получения подарка.');
+        }
+    </script>
 </body>
 </html>
