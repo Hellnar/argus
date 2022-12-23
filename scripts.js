@@ -137,23 +137,6 @@ function submitEmail() {
     }
 }
 
-  // const loader = document.querySelector("#loader")
-    // document.querySelector(".enter-email").addEventListener("submit", async (e) => {
-    //     e.preventDefault()
-    //     loader.style.display = "flex"
-    //     document.querySelector(".enter-email").style.display = "none"
-    //     const user = await checkEmail(e.target[0].value)
-    //     if(user === null) {
-    //         userDoesntExist()
-    //     } else {
-    //         document.querySelector(".enter-email").style.display = "none"
-    //         if(!user.active) {
-    //             document.querySelector(".prize-text").innerText = `Поздравляем! Вы уже выиграли ${user.prize}!`
-    //             if(user.prize === "шоколадку" || user.prize === "украшение") {
-    //                 document.querySelector(".prize-phone").style.display = "block"
-    //                 document.querySelector(".user-phone").style.display = "block"
-    //                 document.querySelector(".take-prize").style.display = "none"
-
 async function checkEmail(email) {
     const user = await fetch("https://argus-server.onrender.com/api/users/", {
         method: "POST",
@@ -166,6 +149,8 @@ async function checkEmail(email) {
 
 function userDoesntExist() {
     document.querySelector(".email-error").style.display = "block"
+    document.querySelector(".add-email").style.display = "block"
+    document.querySelector(".enter-email").style.display = "flex"
     document.querySelector(".add-email").textContent = "Упс! У Деда Мороза нет такого Email адреса"
 }
 
