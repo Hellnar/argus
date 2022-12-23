@@ -134,15 +134,15 @@ function userDoesntExist() {
 
 // ============== MODALS ====================
 
-// function handleBallClick() {
-//     document.querySelectorAll(".ball").forEach(ball => {
-//         ball.addEventListener("click", () => {
-//             resetModal()
-//             submitEmail()
-//             document.querySelector(".modal-box").style.display = "flex"
-//         })
-//     })
-// }
+function handleBallClick() {
+    document.querySelectorAll(".ball").forEach(ball => {
+        ball.addEventListener("click", () => {
+            resetModal()
+            submitEmail()
+            document.querySelector(".modal-box").style.display = "flex"
+        })
+    })
+}
 
 export const ballClick = () => {
     resetModal()
