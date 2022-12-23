@@ -92,8 +92,11 @@ async function updateUser(user, prize) {
 // ============== CHECK EMAIL ====================
 
 function submitEmail() {
+    const loader = document.querySelector("#loader")
     document.querySelector(".enter-email").addEventListener("submit", async (e) => {
         e.preventDefault()
+        loader.style.display = "flex"
+        document.querySelector(".enter-email").style.display = "none"
         const user = await checkEmail(e.target[0].value)
         if(user === null) {
             userDoesntExist()
@@ -116,6 +119,7 @@ function submitEmail() {
             document.querySelector(".enter-email").style.display = "none"
             document.querySelector(".modal-body").style.display = "flex"
         }
+        loader.style.display = "none"
     })
 }
 

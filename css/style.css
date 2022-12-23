@@ -669,3 +669,17 @@ body {
 }
 
 /*# sourceMappingURL=style.css.map */
+
+#loader {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  gap: 12px;
+}
+
+#loader img {
+  width: 20%;
+  height: auto;
+}
