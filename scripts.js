@@ -17,7 +17,6 @@ const db = getFirestore()
 if (!iOS()) {
     handleBallClick()
 }
-handleCloseModal()
 // fillFirebase()
 
 
@@ -154,15 +153,6 @@ function resetModal() {
     document.querySelector(".enter-email input").value = ""
     // document.querySelector("#phone").value = ""
 }
-
-function handleCloseModal() {
-    document.querySelector(".close").addEventListener("click", () => {
-        document.querySelector(".modal-box").style.display = "none"
-        document.querySelector(".add-email").textContent = "Для новогоднего чуда введите ваш e-mail:"
-        document.querySelector(".email-error").style.display = "none"
-    })
-}
-
 
 
 // ============== UTILS ====================

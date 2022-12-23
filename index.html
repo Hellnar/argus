@@ -63,7 +63,7 @@
     <div class="modal-box">
         <div class="modal">
             <div class="modal-header">
-                <img class="close" src="./assets/x.png" alt="Close">
+                <img class="close" onclick="closeModalMobile()" src="./assets/x.png" alt="Close">
             </div>
             <form class="enter-email">
                 <p class="add-email">Для новогоднего чуда введите ваш e-mail:</p>
@@ -120,6 +120,13 @@ function submitEmail() {
         }
     })
 }
+
+
+    function closeModalMobile() {
+        document.querySelector(".modal-box").style.display = "none"
+        document.querySelector(".add-email").textContent = "Для новогоднего чуда введите ваш e-mail:"
+        document.querySelector(".email-error").style.display = "none"
+    }
 
     function onBallClick() {
         resetModal()
